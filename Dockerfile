@@ -1,9 +1,10 @@
-FROM python:3-windowsservercore-1803q
+FROM ubuntu:latest
 
 ENV PYTHONUNBUFFERED = 1
 
+# https://textract.readthedocs.io/en/stable/installation.html
 RUN apt-get update && apt-get install -y \
-  python-dev libxml2-dev libxslt1-dev \
+  python3-dev python3-venv libxml2-dev libxslt1-dev \
   antiword unrtf poppler-utils pstotext \
   tesseract-ocr flac ffmpeg lame libmad0 \
   libsox-fmt-mp3 sox libjpeg-dev swig \
@@ -20,6 +21,6 @@ COPY requirements.txt .
 COPY app/ .
 
 RUN --mount=type=cache,target=/root/.cache \
-  pip install -r requirments.txt
+  pip install -r requirements.txt
 
 CMD ["python3", "app.py"]

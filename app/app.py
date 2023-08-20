@@ -1,4 +1,4 @@
 import textract
 
 text = textract.process("sample.pdf")
-print(text)
+print(text.decode("UTF-8"))
